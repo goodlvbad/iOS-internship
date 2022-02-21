@@ -2,7 +2,7 @@ import UIKit
 
 enum LessonType {
     case math(rating: Int)
-    case ntiveLanguage(rating: Int)
+    case nativeLanguage(rating: Int)
     case computerSince(rating: Int)
     case literature(rating: Int)
 }
@@ -12,7 +12,7 @@ extension LessonType: Equatable {
         switch (lhs, rhs) {
         case (.math(rating: let a), .math(rating: let b)):
             return a == b
-        case (.ntiveLanguage(rating: let a), .ntiveLanguage(rating: let b)):
+        case (.nativeLanguage(rating: let a), .nativeLanguage(rating: let b)):
             return a == b
         case (.computerSince(rating: let a), .computerSince(rating: let b)):
             return a == b
@@ -24,19 +24,12 @@ extension LessonType: Equatable {
     }
 }
 
-protocol MyComparableProtocol {
-    static func <(lhs: Self, rhs: Self) -> Bool
-    static func <=(lhs: Self, rhs: Self) -> Bool
-    static func >(lhs: Self, rhs: Self) -> Bool
-    static func >=(lhs: Self, rhs: Self) -> Bool
-}
-
-extension LessonType: MyComparableProtocol {
+extension LessonType: Comparable {
     static func >=(lhs: LessonType, rhs: LessonType) -> Bool {
         switch (lhs, rhs) {
         case (.math(rating: let a), .math(rating: let b)):
             return a >= b
-        case (.ntiveLanguage(rating: let a), .ntiveLanguage(rating: let b)):
+        case (.nativeLanguage(rating: let a), .nativeLanguage(rating: let b)):
             return a >= b
         case (.computerSince(rating: let a), .computerSince(rating: let b)):
             return a >= b
@@ -46,12 +39,12 @@ extension LessonType: MyComparableProtocol {
             return false
         }
     }
-    
+
     static func > (lhs: LessonType, rhs: LessonType) -> Bool {
         switch (lhs, rhs) {
         case (.math(rating: let a), .math(rating: let b)):
             return a > b
-        case (.ntiveLanguage(rating: let a), .ntiveLanguage(rating: let b)):
+        case (.nativeLanguage(rating: let a), .nativeLanguage(rating: let b)):
             return a > b
         case (.computerSince(rating: let a), .computerSince(rating: let b)):
             return a > b
@@ -61,12 +54,12 @@ extension LessonType: MyComparableProtocol {
             return false
         }
     }
-    
+
     static func <= (lhs: LessonType, rhs: LessonType) -> Bool {
         switch (lhs, rhs) {
         case (.math(rating: let a), .math(rating: let b)):
             return a <= b
-        case (.ntiveLanguage(rating: let a), .ntiveLanguage(rating: let b)):
+        case (.nativeLanguage(rating: let a), .nativeLanguage(rating: let b)):
             return a <= b
         case (.computerSince(rating: let a), .computerSince(rating: let b)):
             return a <= b
@@ -76,12 +69,12 @@ extension LessonType: MyComparableProtocol {
             return false
         }
     }
-    
+
     static func <(lhs: LessonType, rhs: LessonType) -> Bool {
         switch (lhs, rhs) {
         case (.math(rating: let a), .math(rating: let b)):
             return a < b
-        case (.ntiveLanguage(rating: let a), .ntiveLanguage(rating: let b)):
+        case (.nativeLanguage(rating: let a), .nativeLanguage(rating: let b)):
             return a < b
         case (.computerSince(rating: let a), .computerSince(rating: let b)):
             return a < b
@@ -96,8 +89,8 @@ extension LessonType: MyComparableProtocol {
 
 let math = LessonType.math(rating: 7)
 let math2 = LessonType.math(rating: 7)
-let language = LessonType.ntiveLanguage(rating: 2)
-let language2 = LessonType.ntiveLanguage(rating: 26)
+let language = LessonType.nativeLanguage(rating: 2)
+let language2 = LessonType.nativeLanguage(rating: 26)
 
 print(math == math2)
 
