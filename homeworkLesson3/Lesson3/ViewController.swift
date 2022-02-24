@@ -21,12 +21,15 @@ class ViewController: UIViewController {
     private lazy var validationNameLabel: UILabel = buildValidationLabel()
     private lazy var validationEmailLabel: UILabel = buildValidationLabel()
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
     }
-    
+}
+
+//MARK: - Private Methods
+
+extension ViewController {
     private func buildCardView() -> UIView {
         let view = UIView()
         view.backgroundColor = .secondarySystemBackground
@@ -62,11 +65,6 @@ class ViewController: UIViewController {
         return label
     }
     
-}
-
-//MARK: - Private Methods
-
-extension ViewController {
     private func configureView() {
         view.backgroundColor = .systemBackground
         view.addSubview(nameCardView)
@@ -75,8 +73,7 @@ extension ViewController {
         nameCardView.addSubview(validationNameLabel)
         
         nameTextField.placeholder = "Введите имя"
-        validateNameButton.tag = 0
-        
+
         NSLayoutConstraint.activate([
             nameCardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             nameCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -102,8 +99,7 @@ extension ViewController {
         emailCardView.addSubview(validationEmailLabel)
         
         emailTextField.placeholder = "Введите email"
-        validateEmailButton.tag = 1
-        
+
         NSLayoutConstraint.activate([
             emailCardView.topAnchor.constraint(equalTo: nameCardView.bottomAnchor, constant: 20),
             emailCardView.leadingAnchor.constraint(equalTo: nameCardView.leadingAnchor),
@@ -134,20 +130,21 @@ extension ViewController {
     }
     
     @objc private func didTapValidateButton(_ sender: UIButton) {
-        switch sender.tag {
-        case 1:
+        switch sender {
+        case validateEmailButton:
             let regExString = "[A-Za-z0-9]{2,}+@{1}+[a-z0-9]{2,}+\\.{1}+[a-z]{2,}"
             let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regExString)
             let isValid = predicate.evaluate(with: emailTextField.text)
             validationEmailLabel.text = setValidationText(isValid: isValid)
             validationEmailLabel.textColor = setValidationTextColor(isValid: isValid)
-        default:
+        case validateNameButton:
             let regExString = "[A-Za-zА-ЯЁа-яё-]{2,}+\\s{1}+[A-Za-zА-ЯЁа-яё-]{2,}"
             let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regExString)
             let isValid = predicate.evaluate(with: nameTextField.text)
             validationNameLabel.text = setValidationText(isValid: isValid)
             validationNameLabel.textColor = setValidationTextColor(isValid: isValid)
+        default:
+            print("another button tapped, do something else")
         }
     }
-    
 }
