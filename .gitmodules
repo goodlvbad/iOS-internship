@@ -1,0 +1,6 @@
+[submodule "homeworkLesson8"]
+	path = homeworkLesson8
+	url = https://github.com/goodlvbad/homeworkLesson8.git
+[submodule "homeworkLesson7"]
+	path = homeworkLesson7
+	url = https://github.com/goodlvbad/homeworkLesson7.git
